@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     // horizontal rotation speed
     public float horizontalSpeed = 1f;
