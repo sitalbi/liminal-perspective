@@ -31,8 +31,8 @@ public class SelectObject : MonoBehaviour
 
         RaycastHit[] hits;
 
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 500, Color.red);
-        hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, 500.0f);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 800, Color.red);
+        hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, 800.0f);
 
         if (hits.Length > 1)
         {
