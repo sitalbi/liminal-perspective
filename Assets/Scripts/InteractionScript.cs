@@ -16,6 +16,7 @@ public class InteractionScript : MonoBehaviour
     private Vector3 startingScale, newPosition;
     private RaycastHit[] hits;
     private GameObject selectedItem;
+    private Rigidbody selectedRigidbody;
 
     // Update is called once per frame
     private void Update() {
@@ -24,31 +25,39 @@ public class InteractionScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Debug raycast
         Debug.DrawRay(cam.transform.position, cam.transform.forward * 800, Color.red);
 
         hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, 800f);
 
-        if (hits.Length > 0)
+        // Check if the raycast hits any interactable objects
+        if (hits.Length > 0 && !get)
         {
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.transform.CompareTag(interactableTag))
-                {
+            canGrab = false;
+            foreach (RaycastHit hit in hits) {
+                if (hit.transform.CompareTag(interactableTag)) { 
                     canGrab = true;
                     selectedItem = hit.transform.gameObject;
                     break;
                 }
-                else
-                {
-                    canGrab = false;
-                    selectedItem = null;
-                }
             }
         }
+        
+        CheckInteraction();
+    }
 
+    private void CheckSprite() {
+        if (canGrab) {
+            aimPoint.sprite = !get ? hoverSprite : grabSprite;
+        } else {
+            aimPoint.sprite = null;
+        }
+    }
+
+    private void CheckInteraction() {
         if (canGrab)
         {
-            if (selectedItem != null && selectedItem.CompareTag(interactableTag))
+            if (selectedItem != null)
             {
                 // Initialize grabbing
                 if (!get)
@@ -56,13 +65,14 @@ public class InteractionScript : MonoBehaviour
                     startingDistance = Vector3.Distance(cam.transform.position, selectedItem.transform.position);
                     startingScale = selectedItem.transform.localScale;
                     get = true;
+                    selectedRigidbody = selectedItem.GetComponent<Rigidbody>();
+                    selectedItem.transform.SetParent(cam.transform);
                 }
                 if (interactAction.action.inProgress)
                 {
-                    selectedItem.transform.SetParent(cam.transform);
-                    Rigidbody selectedRigidbody = selectedItem.GetComponent<Rigidbody>();
-                    selectedRigidbody.isKinematic = true;
-
+                    if(!selectedRigidbody.isKinematic) {
+                        selectedRigidbody.isKinematic = true;  
+                    }
                     // Calculate the new position along the ray direction
                     float inverseItemScale = selectedItem.transform.localScale.x*-1; 
                     
@@ -85,18 +95,10 @@ public class InteractionScript : MonoBehaviour
                 else
                 {
                     get = false;
-                    selectedItem.GetComponent<Rigidbody>().isKinematic = false;
+                    selectedRigidbody.isKinematic = false;
                     selectedItem.transform.SetParent(null);
                 }
             }
-        }
-    }
-
-    private void CheckSprite() {
-        if (canGrab) {
-            aimPoint.sprite = !get ? hoverSprite : grabSprite;
-        } else {
-            aimPoint.sprite = null;
         }
     }
 }
