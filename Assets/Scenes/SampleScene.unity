@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 1123432963}
   - component: {fileID: 1123432965}
   - component: {fileID: 1123432964}
+  - component: {fileID: 1123432966}
   m_Layer: 5
   m_Name: AimPoint
   m_TagString: Untagged
@@ -499,7 +500,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123432964
 MonoBehaviour:
@@ -521,7 +522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c014a01cc5d92e042821517167efa388, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -539,6 +540,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123432962}
   m_CullTransparentMesh: 1
+--- !u!114 &1123432966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123432962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ddee7a24b95cf4dafde82abe24dbc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonSpriteSize: {x: 0, y: 0}
+  spriteSize: {x: 0, y: 0}
 --- !u!1 &1181267514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,6 +1256,18 @@ PrefabInstance:
       propertyPath: aimPoint
       value: 
       objectReference: {fileID: 1123432964}
+    - target: {fileID: 6658874415876851852, guid: 993e3f2a9283cf345892ee6a0c40c21e,
+        type: 3}
+      propertyPath: grabSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c014a01cc5d92e042821517167efa388,
+        type: 3}
+    - target: {fileID: 6658874415876851852, guid: 993e3f2a9283cf345892ee6a0c40c21e,
+        type: 3}
+      propertyPath: hoverSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e49acfde915f7984c9534ba8bed7e020,
+        type: 3}
     - target: {fileID: 6658874415876851852, guid: 993e3f2a9283cf345892ee6a0c40c21e,
         type: 3}
       propertyPath: interactAction
